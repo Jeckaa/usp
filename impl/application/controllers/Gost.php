@@ -16,6 +16,22 @@ class Gost extends CI_Controller{
     public function __construct() {
         parent::__construct();
         $this->load->model('Korisnik');
+        if ($this->session->userdata('type')!=NULL)
+        {
+            if ($this->session->userdata('type')==='A')
+            {
+                redirect("Admin");
+            }
+            else if ($this->session->userdata('type')==='P')
+            {
+                redirect("Pacijent");
+            }
+            else if ($this->session->userdata('type')==='S')
+            {
+                redirect("Sluzbenik");
+            }
+            else if ($this->session->userdata('type')==='L') redirect("Lekar");
+        }
     }
     
     public function index($message=NULL)
@@ -37,12 +53,12 @@ class Gost extends CI_Controller{
         else
         {
             $result=$this->Korisnik->login($username, $password);
-            if ($result==1)
+            if ($result==='1')
             {
                 $message="Uneli ste pogresanu lozinku!";
                 $this->index($message);
             }
-            else if ($result==2)
+            else if ($result==='2')
             {
                 $message="Uneli ste pogresno korisnicko ime!";
                 $this->index($message);

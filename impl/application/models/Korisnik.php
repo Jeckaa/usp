@@ -33,4 +33,5 @@ class Korisnik extends CI_Model{
         }
         else return 2;
     }
+    
 }
