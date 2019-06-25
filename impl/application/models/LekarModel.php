@@ -27,4 +27,13 @@ class LekarModel extends CI_Model{
         $ret=$res->Ime." ".$res->Prezime;
         return $ret;         
     }
+    
+    public function lekariIzBolnice($idBolnice, $idLekara)
+    {
+        $this->db->select('*');
+        $this->db->from('lekar');
+        $this->db->where('Bolnica', $idBolnice);
+        $this->db->where('Username !=', $idLekara);
+        return $this->db->get()->result();
+    }
 }

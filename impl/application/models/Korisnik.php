@@ -33,5 +33,11 @@ class Korisnik extends CI_Model{
         }
         else return 2;
     }
-    
+    public
+            function promeniPassword($password, $username) 
+    {
+        $this->db->set('Password', $password);
+        $this->db->where('Username', $username);
+        $this->db->update('korisnik');
+    }
 }

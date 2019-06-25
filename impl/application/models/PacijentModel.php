@@ -24,4 +24,33 @@ class PacijentModel extends CI_Model {
         $this->db->where('Username', $username);
         return $this->db->get()->row();
     }
+    
+    public function promeniIme($ime, $username)
+    {
+        $this->db->set('Ime', $ime);
+        $this->db->where('Username', $username);
+        $this->db->update('pacijent');
+    }
+    
+    public function promeniPrezime($prezime, $username)
+    {
+        $this->db->set('Prezime', $prezime);
+        $this->db->where('Username', $username);
+        $this->db->update('pacijent');
+    }
+    
+    
+    public function promeniAdresu($adresa, $username)
+    {
+        $this->db->set('Adresa', $adresa);
+        $this->db->where('Username', $username);
+        $this->db->update('pacijent');
+    }
+    
+    public function promeniLekara($lekar, $username)
+    {
+        $this->db->set('Lekar', $lekar);
+        $this->db->where('Username', $username);
+        $this->db->update('pacijent');
+    }
 }
