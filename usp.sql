@@ -23,9 +23,9 @@ SET time_zone = "+00:00";
 --
 
 -- --------------------------------------------------------
-
-CREATE DATABASE usp;
-USE usp;
+DROP DATABASE IF EXISTS `usp`;
+CREATE DATABASE `usp`;
+USE `usp`;
 
 --
 -- Table structure for table `bolnica`

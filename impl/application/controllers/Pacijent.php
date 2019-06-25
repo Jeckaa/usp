@@ -19,7 +19,28 @@ class Pacijent extends CI_Controller {
         $this->load->model('LekarModel');
         $this->load->model('Bolnica');
         $this->load->model('Korisnik');
+        $this->load->model('Merenja');
+        if ($this->session->userdata('type')!=NULL)
+        {
+            if ($this->session->userdata('type')==='A')
+            {
+                redirect("Admin");
+            }
+            else if ($this->session->userdata('type')==='S')
+            {
+                redirect("Sluzbenik");
+            }
+            else if ($this->session->userdata('type')==='L') redirect("Lekar");
+        }
+        else redirect("Gost");
     }
+    
+    public function logout()
+    {
+        $this->session->sess_destroy();
+        redirect('Gost');
+    }
+            
     
     public function index()
     {
@@ -135,8 +156,17 @@ class Pacijent extends CI_Controller {
         {
             $this->PacijentModel->promeniBolnicu($username, $bolnica, $lekar);
             $this->session->unset_userdata('bolnicatmp');
-            $this->index();
+            redirect('Pacijent');
         }
+    }
+    
+    public function evidencija()
+    {
+        $this->load->view("sablon/headerPacijent.php");
+        $username= $this->session->userdata('user');
+        $data['merenja']=$this->Merenja->dohvMerenja($username);
+        $this->load->view("pacijent/evidencija.php", $data);
+        $this->load->view("sablon/footer.php");
     }
     
 }

@@ -61,4 +61,5 @@ class PacijentModel extends CI_Model {
         $this->db->where('Username', $username);
         $this->db->update('pacijent');
     }
+    
 }
