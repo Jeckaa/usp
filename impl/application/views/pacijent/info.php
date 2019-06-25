@@ -1,11 +1,15 @@
 
 <div class="container-fluid">
-    <h1 class="text-center" style="margin-bottom: 25; margin-top: 25;">  Dobro dosli <?php if(isset($username)) echo $username; ?>! </h1>    
+    <h1 class="text-center" style="margin-bottom: 25; margin-top: 25;">  Dobro dosli <?php if(isset($ime) && isset($prezime)) echo "$ime $prezime"; ?>! </h1>    
     <div class="row">
         <div class="col-sm-3"></div>
         <div class="col-sm-6">
             <table class="table table-hover align-items-center">
                 <tbody>
+                    <tr>
+                        <th scope="row">Korisnicko ime:</th>
+                        <td><?php if(isset($username)) echo $username; ?></td>
+                    </tr>
                     <tr class="table-active">
                         <th scope="row">Ime:</th>
                         <td><?php if(isset($ime)) echo $ime; ?></td>
@@ -42,7 +46,7 @@
                 <input type="submit" class="btn btn-success" value="Promeni informacije">
             </div>
             <div class="col-sm-3 text-center">
-                <input type="submit" class="btn btn-success" formaction="Pacijent/editBolnica" value="Promeni bolnicu">
+                <input type="submit" class="btn btn-success" formaction="<?php echo site_url('Pacijent/editBolnica'); ?>" value="Promeni bolnicu">
             </div>
             <div class="col-sm-3"></div>
         </div>

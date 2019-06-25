@@ -24,4 +24,12 @@ class Bolnica extends CI_Model {
         $this->db->where('IdBolnica', $id);
         return $this->db->get()->row()->Naziv;
     }
+    
+    public function dohvatiBolnice($id)
+    {
+        $this->db->select('*');
+        $this->db->from('bolnica');
+        $this->db->where('IdBolnica!=', $id);
+        return $this->db->get()->result();
+    }
 }

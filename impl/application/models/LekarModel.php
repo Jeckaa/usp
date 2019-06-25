@@ -28,12 +28,12 @@ class LekarModel extends CI_Model{
         return $ret;         
     }
     
-    public function lekariIzBolnice($idBolnice, $idLekara)
+    public function lekariIzBolnice($idBolnice, $idLekara=NULL)
     {
         $this->db->select('*');
         $this->db->from('lekar');
         $this->db->where('Bolnica', $idBolnice);
-        $this->db->where('Username !=', $idLekara);
+        if ($idLekara!=NULL) $this->db->where('Username !=', $idLekara);
         return $this->db->get()->result();
     }
 }
