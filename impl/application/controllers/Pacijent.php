@@ -20,6 +20,7 @@ class Pacijent extends CI_Controller {
         $this->load->model('Bolnica');
         $this->load->model('Korisnik');
         $this->load->model('Merenja');
+        $this->load->model('Poruka');
         if ($this->session->userdata('type')!=NULL)
         {
             if ($this->session->userdata('type')==='A')
@@ -169,4 +170,21 @@ class Pacijent extends CI_Controller {
         $this->load->view("sablon/footer.php");
     }
     
+    public function slanjePoruke()
+    {
+        $this->load->view("sablon/headerPacijent.php");
+        $username= $this->session->userdata('user');
+        $lekar=$this->PacijentModel->info($username)->Lekar;
+        $data['lekar']=$this->LekarModel->imeiPrezime($lekar);
+        $this->load->view("pacijent/slanjePoruke.php", $data);
+        $this->load->view("sablon/footer.php");
+    }
+    
+    public function posaljiPoruku()
+    {
+        $sadrzaj= $this->input->post('sadrzaj');
+        $username= $username= $this->session->userdata('user');
+        $lekar=$this->PacijentModel->info($username)->Lekar;
+        $this->Poruka->posalji($username, $lekar, $sadrzaj);
+    }
 }

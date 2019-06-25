@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: Jun 25, 2019 at 03:33 PM
+-- Generation Time: Jun 25, 2019 at 05:44 PM
 -- Server version: 5.7.24
 -- PHP Version: 7.2.14
 
@@ -23,9 +23,6 @@ SET time_zone = "+00:00";
 --
 
 -- --------------------------------------------------------
-DROP DATABASE IF EXISTS `usp`;
-CREATE DATABASE `usp`;
-USE `usp`;
 
 --
 -- Table structure for table `bolnica`
@@ -117,9 +114,19 @@ CREATE TABLE IF NOT EXISTS `merenja` (
   `IdMerenja` int(11) NOT NULL,
   `Tip` char(1) COLLATE utf8_unicode_ci DEFAULT NULL,
   `Podaci` varchar(200) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `Datum` date COLLATE utf8_unicode_ci NOT NULL,
+  `Datum` timestamp NOT NULL,
   PRIMARY KEY (`Username`,`IdMerenja`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Dumping data for table `merenja`
+--
+
+INSERT INTO `merenja` (`Username`, `IdMerenja`, `Tip`, `Podaci`, `Datum`) VALUES
+('jeckaa', 1, 'P', 'dfagagsg', '2019-06-10 22:00:00'),
+('jeckaa', 2, 'P', 'dfagagsg', '2019-06-25 01:09:14'),
+('jeckaa', 3, 'P', 'dfagagsg', '2019-06-25 02:26:16'),
+('jeckaa', 4, 'P', 'dfagagsg', '2019-06-12 21:40:39');
 
 -- --------------------------------------------------------
 
@@ -160,14 +167,14 @@ CREATE TABLE IF NOT EXISTS `poruka` (
   `Sadrzaj` varchar(200) COLLATE utf8_unicode_ci DEFAULT NULL,
   `PorukaOd` varchar(38) COLLATE utf8_unicode_ci NOT NULL,
   `PorukaDo` varchar(38) COLLATE utf8_unicode_ci NOT NULL,
-  `Datum` date COLLATE utf8_unicode_ci NOT NULL,
-  `Procitana` tinyint(1) COLLATE utf8_unicode_ci NOT NULL DEFAULT '0',
+  `Datum` timestamp NOT NULL,
+  `Procitana` tinyint(1) NOT NULL DEFAULT '0',
   PRIMARY KEY (`IdPoruka`),
   KEY `R_17` (`PorukaOd`),
   KEY `R_19` (`PorukaDo`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
--- --------------------------------------------------------
+
 
 --
 -- Table structure for table `terapija`
