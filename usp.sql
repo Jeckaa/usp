@@ -24,6 +24,9 @@ SET time_zone = "+00:00";
 
 -- --------------------------------------------------------
 
+CREATE DATABASE usp;
+USE usp;
+
 --
 -- Table structure for table `bolnica`
 --
@@ -158,6 +161,7 @@ CREATE TABLE IF NOT EXISTS `poruka` (
   `PorukaOd` varchar(38) COLLATE utf8_unicode_ci NOT NULL,
   `PorukaDo` varchar(38) COLLATE utf8_unicode_ci NOT NULL,
   `Datum` date COLLATE utf8_unicode_ci NOT NULL,
+  `Procitana` tinyint(1) COLLATE utf8_unicode_ci NOT NULL DEFAULT '0',
   PRIMARY KEY (`IdPoruka`),
   KEY `R_17` (`PorukaOd`),
   KEY `R_19` (`PorukaDo`)
