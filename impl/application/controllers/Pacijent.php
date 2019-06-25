@@ -170,12 +170,15 @@ class Pacijent extends CI_Controller {
         $this->load->view("sablon/footer.php");
     }
     
-    public function slanjePoruke()
+    public function slanjePoruke($message=NULL)
     {
         $this->load->view("sablon/headerPacijent.php");
         $username= $this->session->userdata('user');
         $lekar=$this->PacijentModel->info($username)->Lekar;
         $data['lekar']=$this->LekarModel->imeiPrezime($lekar);
+        if ($message!=NULL) {
+            $data['message']=$message;
+        }
         $this->load->view("pacijent/slanjePoruke.php", $data);
         $this->load->view("sablon/footer.php");
     }
@@ -183,8 +186,17 @@ class Pacijent extends CI_Controller {
     public function posaljiPoruku()
     {
         $sadrzaj= $this->input->post('sadrzaj');
-        $username= $username= $this->session->userdata('user');
-        $lekar=$this->PacijentModel->info($username)->Lekar;
-        $this->Poruka->posalji($username, $lekar, $sadrzaj);
+        if (empty($sadrzaj))
+        {
+            $message="Morate uneti poruku!";
+            $this->slanjePoruke($message);
+        }
+        else
+        {
+            $username= $username= $this->session->userdata('user');
+            $lekar=$this->PacijentModel->info($username)->Lekar;
+            $this->Poruka->posalji($username, $lekar, $sadrzaj);
+            $this->index();
+        }
     }
 }

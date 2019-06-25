@@ -1,6 +1,12 @@
+<div class="row">
+    <div class="col-sm-12"> 
+        <?php if (isset($message)) echo "<p style=\"color:red; text-align:center;\">$message</p>"; ?>
+    </div>
+</div>
 
 <h1 class="text-center" style="margin-top: 25; margin-bottom: 25;">SLANJE PORUKE</h1>
 <br>
+
 <h2 class="text-center" style="margin-bottom: 50;">Za: <b><?php if(isset($lekar)) echo $lekar;?></b></h2>
 
 <div class="container-fluid">
