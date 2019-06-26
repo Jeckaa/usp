@@ -29,9 +29,9 @@ class Korisnik extends CI_Model{
             {
                 return $result;
             }
-            else return 1;
+            else return '1';
         }
-        else return 2;
+        else return '2';
     }
     public
             function promeniPassword($password, $username) 

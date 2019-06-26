@@ -1,3 +1,5 @@
+<h1 class="text-center" style="margin-bottom: 25; margin-top: 25;">EVIDENCIJA <?php if(isset($type)) echo strtoupper ($type); ?></h1>
+
 <div class="container-fluid">
     
     <?php if (isset($merenja)) {$i=0; foreach ($merenja as $merenje) {

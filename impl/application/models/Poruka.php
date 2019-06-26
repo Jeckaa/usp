@@ -35,6 +35,37 @@ class Poruka extends CI_Model{
     
     public function dohvPoruke($user)
     {
-        
+        $query="select * from poruka where PorukaOd=".$this->db->escape($user)." or PorukaDo=". $this->db->escape($user)." order by Datum desc";
+        return $this->db->query($query)->result();
+    }
+    
+    public function procitajPoruku($idPoruka, $username)
+    {
+        $this->db->select('*');
+        $this->db->from('poruka');
+        $this->db->where('IdPoruka', $idPoruka);
+        $poruka= $this->db->get()->row();
+        if ($poruka!=NULL)
+        {
+            if ($poruka->PorukaDo===$username)
+            {
+                $this->db->set('Procitana', 1);
+                $this->db->where('IdPoruka', $idPoruka);
+                $this->db->update('poruka');
+            }
+        }
+        return $poruka;
+    }
+    
+    public function dohvPrimljene($username)
+    {
+        $query="select * from poruka where PorukaDo=".$this->db->escape($username)." order by Datum desc";
+        return $this->db->query($query)->result();
+    }
+    
+    public function dohvProcitane($username)
+    {
+        $query="select * from poruka where PorukaOd=".$this->db->escape($username)." order by Datum desc";
+        return $this->db->query($query)->result();
     }
 }

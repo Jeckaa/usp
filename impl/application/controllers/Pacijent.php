@@ -170,6 +170,36 @@ class Pacijent extends CI_Controller {
         $this->load->view("sablon/footer.php");
     }
     
+    public function evidencijaPuls()
+    {
+        $this->load->view("sablon/headerPacijent.php");
+        $username= $this->session->userdata('user');
+        $data['type']='pulsa';
+        $data['merenja']=$this->Merenja->dohvMerenjaPoTipu($username, "puls");
+        $this->load->view("pacijent/evidencija.php", $data);
+        $this->load->view("sablon/footer.php");
+    }
+    
+    public function evidencijaPritisak()
+    {
+        $this->load->view("sablon/headerPacijent.php");
+        $username= $this->session->userdata('user');
+        $data['type']='pritiska';
+        $data['merenja']=$this->Merenja->dohvMerenjaPoTipu($username, "pritisak");
+        $this->load->view("pacijent/evidencija.php", $data);
+        $this->load->view("sablon/footer.php");
+    }
+    
+    public function evidencijaSlika()
+    {
+        $this->load->view("sablon/headerPacijent.php");
+        $username= $this->session->userdata('user');
+        $data['type']='krvne slike';
+        $data['merenja']=$this->Merenja->dohvMerenjaPoTipu($username, "krvna slika");
+        $this->load->view("pacijent/evidencija.php", $data);
+        $this->load->view("sablon/footer.php");
+    }
+    
     public function slanjePoruke($message=NULL)
     {
         $this->load->view("sablon/headerPacijent.php");
@@ -193,10 +223,54 @@ class Pacijent extends CI_Controller {
         }
         else
         {
-            $username= $username= $this->session->userdata('user');
+            $username= $this->session->userdata('user');
             $lekar=$this->PacijentModel->info($username)->Lekar;
             $this->Poruka->posalji($username, $lekar, $sadrzaj);
             $this->index();
         }
+    }
+    
+    public function pregledPoruka()
+    {
+        $this->load->view("sablon/headerPacijent.php");
+        $username= $this->session->userdata('user');
+        $poruke= $this->Poruka->dohvPoruke($username);
+        $data['poruke']=$poruke;
+        $data['username']=$username;
+        $this->load->view('pacijent/svePoruke.php', $data);
+        $this->load->view("sablon/footer.php");
+    }
+    
+    public function procitajPoruku()
+    {
+        $idPoruka= $this->input->get('idPoruka');
+        $username= $this->session->userdata('user');
+        $poruka=$this->Poruka->procitajPoruku($idPoruka, $username);
+        $data['poruka']=$poruka;
+        $this->load->view("sablon/headerPacijent.php");
+        $this->load->view("pacijent/poruka.php", $data);
+        $this->load->view("sablon/footer.php");
+    }
+    
+    public function primljene()
+    {
+        $this->load->view("sablon/headerPacijent.php");
+        $username= $this->session->userdata('user');
+        $poruke= $this->Poruka->dohvPrimljene($username);
+        $data['poruke']=$poruke;
+        $data['username']=$username;
+        $this->load->view('pacijent/svePoruke.php', $data);
+        $this->load->view("sablon/footer.php");
+    }
+    
+    public function poslate()
+    {
+        $this->load->view("sablon/headerPacijent.php");
+        $username= $this->session->userdata('user');
+        $poruke= $this->Poruka->dohvProcitane($username);
+        $data['poruke']=$poruke;
+        $data['username']=$username;
+        $this->load->view('pacijent/svePoruke.php', $data);
+        $this->load->view("sablon/footer.php");
     }
 }

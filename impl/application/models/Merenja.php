@@ -22,4 +22,10 @@ class Merenja extends CI_Model {
         $query="select * from merenja where Username=".$this->db->escape($username)."order by Datum DESC";
         return $this->db->query($query)->result();
     }
+    
+    public function dohvMerenjaPoTipu($username, $type)
+    {
+        $query="select * from merenja where Username=".$this->db->escape($username)." and Tip=".$this->db->escape($type)." order by Datum DESC";
+        return $this->db->query($query)->result();
+    }
 }
