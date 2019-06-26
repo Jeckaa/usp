@@ -21,6 +21,7 @@ class Pacijent extends CI_Controller {
         $this->load->model('Korisnik');
         $this->load->model('Merenja');
         $this->load->model('Poruka');
+        $this->load->model('Terapija');
         if ($this->session->userdata('type')!=NULL)
         {
             if ($this->session->userdata('type')==='A')
@@ -271,6 +272,17 @@ class Pacijent extends CI_Controller {
         $data['poruke']=$poruke;
         $data['username']=$username;
         $this->load->view('pacijent/svePoruke.php', $data);
+        $this->load->view("sablon/footer.php");
+    }
+    
+    public function terapije()
+    {
+        $this->load->view("sablon/headerPacijent.php");
+        $username= $this->session->userdata('user'); 
+        $res= $this->Terapija->dohvTerapije($username);
+        $data=[];
+        if ($res!=NULL) $data['terapije']= $res;
+        $this->load->view('pacijent/terapije.php', $data);
         $this->load->view("sablon/footer.php");
     }
 }

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: Jun 26, 2019 at 11:52 AM
+-- Generation Time: Jun 26, 2019 at 12:12 PM
 -- Server version: 5.7.24
 -- PHP Version: 7.2.14
 
@@ -200,6 +200,7 @@ CREATE TABLE IF NOT EXISTS `terapija` (
   `Lekar` varchar(38) COLLATE utf8_unicode_ci DEFAULT NULL,
   `IdTerapija` int(11) NOT NULL,
   `Opis` varchar(200) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `Datum` timestamp NOT NULL,
   PRIMARY KEY (`IdTerapija`),
   KEY `R_14` (`Pacijent`),
   KEY `R_15` (`Lekar`)

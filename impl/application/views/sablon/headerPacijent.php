@@ -16,6 +16,9 @@
                         <a class="nav-link" href="<?php echo site_url("Pacijent/index"); ?>">Pocetna <span class="sr-only">(current)</span></a>
                     </li>
                     <li class="nav-item">
+                        <a class="nav-link" href="<?php echo site_url("Pacijent/terapije"); ?>">Terapije <span class="sr-only"></span></a>
+                    </li>
+                    <li class="nav-item">
                         <div class="btn-group" role="group" aria-label="Button group with nested dropdown">
                             <button type="button" style="padding: 0px" class="btn btn-primary"><a class="nav-link" href="<?php echo site_url("Pacijent/evidencija"); ?>">Evidencija</a></button>
                             <div class="btn-group" role="group">

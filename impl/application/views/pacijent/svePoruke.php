@@ -60,6 +60,10 @@
                </div>
           <?php  }
      }
-    } ?>
+    }
+    else {
+        echo '<h4 class="text-center" style="color: red;">Nemate nijednu poslatu ni primljenu poruku!</h4>';
+    }
+?>
     </form>
 </div>
