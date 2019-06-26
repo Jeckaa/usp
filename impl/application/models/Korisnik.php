@@ -33,11 +33,34 @@ class Korisnik extends CI_Model{
         }
         else return '2';
     }
-    public
-            function promeniPassword($password, $username) 
+    public function promeniPassword($password, $username) 
     {
         $this->db->set('Password', $password);
         $this->db->where('Username', $username);
         $this->db->update('korisnik');
+    }
+    
+    public function isExisting($username)
+    {
+        $this->db->select('*');
+        $this->db->from('Korisnik');
+        $this->db->where('Username',$username);
+        $result= $this->db->get()->row();
+        if ($result!=NULL) return TRUE;
+        else return FALSE;
+    }
+    
+    public function dodajKorisnika($username, $password, $type)
+    {
+        $this->db->set('Username', $username);
+        $this->db->set('Password', $password);
+        $this->db->set('Tip', $type);
+        $this->db->insert('korisnik');
+    }
+    
+    public function izbrisi($username)
+    {
+        $this->db->where('Username', $username);
+        $this->db->delete('korisnik');
     }
 }
