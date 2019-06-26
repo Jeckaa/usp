@@ -62,4 +62,10 @@ class PacijentModel extends CI_Model {
         $this->db->update('pacijent');
     }
     
+    public function getPatients($lekar){
+        $this->db->select("*");
+        $this->db->from("pacijent");
+        $this->db->where("Lekar", $lekar);
+        return $this->db->get()->result();
+    }
 }
