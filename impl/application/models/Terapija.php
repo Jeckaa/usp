@@ -22,4 +22,8 @@ class Terapija extends CI_Model {
         $query="select * from terapija where Pacijent=".$this->db->escape($username)." order by Datum desc";
         return $this->db->query($query)->result();
     }
+    
+    public function getTherapyById($idTher){
+        return $this->db->query("select + from terapija where IdTerapija={$idTher}")->row();
+    }
 }
