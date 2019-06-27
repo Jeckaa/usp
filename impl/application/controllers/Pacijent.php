@@ -226,8 +226,16 @@ class Pacijent extends CI_Controller {
         {
             $username= $this->session->userdata('user');
             $lekar=$this->PacijentModel->info($username)->Lekar;
-            $this->Poruka->posalji($username, $lekar, $sadrzaj);
-            $this->index();
+            if ($this->LekarModel->isActive($lekar)!=NULL)
+            {   
+                $this->Poruka->posalji($username, $lekar, $sadrzaj);
+                $this->index();
+            }
+            else
+            {
+                $message="Nemate izabranog lekara!";
+                $this->slanjePoruke($message);
+            }
         }
     }
     

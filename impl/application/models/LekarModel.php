@@ -29,6 +29,15 @@ class LekarModel extends CI_Model{
         return $ret;         
     }
     
+    public function isActive($username)
+    {
+        $this->db->select('*');
+        $this->db->from('lekar');
+        $this->db->where('Username', $username);
+        $this->db->where('isActive', 1);
+        return $this->db->get()->row();
+    }
+    
     public function lekariIzBolnice($idBolnice, $idLekara=NULL)
     {
         $this->db->select('*');
