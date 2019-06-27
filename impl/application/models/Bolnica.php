@@ -29,6 +29,7 @@ class Bolnica extends CI_Model {
     {
         $this->db->select('*');
         $this->db->from('bolnica');
+        $this->db->where('isActive', 1);
         $this->db->where('IdBolnica!=', $id);
         return $this->db->get()->result();
     }
@@ -37,6 +38,7 @@ class Bolnica extends CI_Model {
     {
        $this->db->select('*');
         $this->db->from('bolnica');
+        $this->db->where('isActive', 1);
         return $this->db->get()->result(); 
     }
 }

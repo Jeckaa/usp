@@ -22,6 +22,7 @@ class Korisnik extends CI_Model{
         $this->db->select('*');
         $this->db->from('Korisnik');
         $this->db->where('Username',$username);
+        $this->db->where('isActive', 1);
         $result= $this->db->get()->row();
         if ($result!=NULL)
         {
@@ -55,12 +56,14 @@ class Korisnik extends CI_Model{
         $this->db->set('Username', $username);
         $this->db->set('Password', $password);
         $this->db->set('Tip', $type);
+        $this->db->set('isActive', 1);
         $this->db->insert('korisnik');
     }
     
     public function izbrisi($username)
     {
+        $this->db->set('isActive', 0);
         $this->db->where('Username', $username);
-        $this->db->delete('korisnik');
+        $this->db->update('korisnik');
     }
 }

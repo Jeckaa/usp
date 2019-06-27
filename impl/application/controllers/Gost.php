@@ -63,7 +63,7 @@ class Gost extends CI_Controller{
                 $message="Uneli ste pogresno korisnicko ime!";
                 $this->index($message);
             }
-            else 
+            else
             {
                 $type=$result->Tip;
                 $user=$result->Username;

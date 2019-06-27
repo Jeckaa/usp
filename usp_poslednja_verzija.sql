@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: Jun 27, 2019 at 12:31 PM
+-- Generation Time: Jun 27, 2019 at 01:03 PM
 -- Server version: 5.7.24
 -- PHP Version: 7.2.14
 
@@ -33,7 +33,7 @@ CREATE TABLE IF NOT EXISTS `bolnica` (
   `IdBolnica` int(11) NOT NULL,
   `Naziv` varchar(20) COLLATE utf8_unicode_ci DEFAULT NULL,
   `Adresa` varchar(38) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `isActive` tinyint(4) NOT NULL,
+  `isActive` tinyint(1) NOT NULL DEFAULT '1',
   PRIMARY KEY (`IdBolnica`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
@@ -57,6 +57,7 @@ CREATE TABLE IF NOT EXISTS `korisnik` (
   `Username` varchar(38) COLLATE utf8_unicode_ci NOT NULL,
   `Password` varchar(28) COLLATE utf8_unicode_ci DEFAULT NULL,
   `Tip` char(1) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `isActive` tinyint(1) NOT NULL DEFAULT '1',
   PRIMARY KEY (`Username`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
@@ -64,18 +65,18 @@ CREATE TABLE IF NOT EXISTS `korisnik` (
 -- Dumping data for table `korisnik`
 --
 
-INSERT INTO `korisnik` (`Username`, `Password`, `Tip`) VALUES
-('adsa', 'asd', 'P'),
-('bxzv', 'jelena', 'P'),
-('dasd', '123', 'P'),
-('jeckaa', 'jelena', 'P'),
-('lekar', '123', 'L'),
-('lekar2', '123', 'L'),
-('lekar3', '123', 'L'),
-('lekar4', '123', 'L'),
-('lekar6', '123', 'L'),
-('sluzbenik', '123', 'S'),
-('stefan', 'stefi', 'P');
+INSERT INTO `korisnik` (`Username`, `Password`, `Tip`, `isActive`) VALUES
+('adsa', 'asd', 'P', 1),
+('bxzv', 'jelena', 'P', 1),
+('dasd', '123', 'P', 1),
+('jeckaa', 'jelena', 'P', 1),
+('lekar', '123', 'L', 1),
+('lekar2', '123', 'L', 1),
+('lekar3', '123', 'L', 1),
+('lekar4', '123', 'L', 1),
+('lekar6', '123', 'L', 1),
+('sluzbenik', '123', 'S', 1),
+('stefan', 'stefi', 'P', 1);
 
 -- --------------------------------------------------------
 
@@ -91,7 +92,7 @@ CREATE TABLE IF NOT EXISTS `lekar` (
   `JMBG` varchar(38) COLLATE utf8_unicode_ci DEFAULT NULL,
   `Adresa` varchar(38) COLLATE utf8_unicode_ci DEFAULT NULL,
   `Bolnica` int(11) DEFAULT NULL,
-  `isActive` tinyint(4) NOT NULL,
+  `isActive` tinyint(1) NOT NULL DEFAULT '1',
   PRIMARY KEY (`Username`),
   KEY `R_7` (`Bolnica`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
@@ -148,7 +149,7 @@ CREATE TABLE IF NOT EXISTS `pacijent` (
   `JMBG` varchar(13) COLLATE utf8_unicode_ci DEFAULT NULL,
   `Adresa` varchar(20) COLLATE utf8_unicode_ci DEFAULT NULL,
   `Bolnica` int(11) DEFAULT NULL,
-  `isActive` tinyint(4) NOT NULL,
+  `isActive` tinyint(1) NOT NULL DEFAULT '1',
   PRIMARY KEY (`Username`),
   KEY `R_5` (`Lekar`),
   KEY `R_8` (`Bolnica`)

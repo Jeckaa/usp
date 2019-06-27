@@ -67,6 +67,7 @@ class PacijentModel extends CI_Model {
     {
         $this->db->select('*');
         $this->db->from('pacijent');
+        $this->db->where('isActive', 1);
         return $this->db->get()->result();
     }
     
@@ -79,13 +80,15 @@ class PacijentModel extends CI_Model {
         $this->db->set('JMBG', $jmbg);
         $this->db->set('Adresa', $adresa);
         $this->db->set('Bolnica', $bolnica);
+        $this->db->set('isActive', 1);
         $this->db->insert('pacijent');
     }
     
     public function izbrisi($username)
     {
+        $this->db->set('isActive', 0);
         $this->db->where('Username', $username);
-        $this->db->delete('pacijent');
+        $this->db->update('pacijent');
     }
     
     public function posaljiPoruku($lekar, $username)
@@ -93,14 +96,12 @@ class PacijentModel extends CI_Model {
         $this->db->select('*');
         $this->db->from('pacijent');
         $this->db->where('Lekar', $lekar);
+        $this->db->where('isActive', 1);
         $res= $this->db->get()->result();
         foreach ($res as $pacijent)
         {
             $sadrzaj="Molimo vas da ponovo izaberete lekara!";
             $this->Poruka->posalji($username, $pacijent->Username, $sadrzaj);
-            $this->db->set('Lekar', NULL);
-            $this->db->where('Username', $username);
-            $this->db->update('pacijent');
         }
     }
 }

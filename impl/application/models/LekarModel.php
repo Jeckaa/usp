@@ -24,8 +24,7 @@ class LekarModel extends CI_Model{
         $this->db->where('Username', $username);
         
         $res=$this->db->get()->row();
-        if ($res!=NULL)
-        $ret=$res->Ime." ".$res->Prezime;
+        if ($res!=NULL && $res->isActive==='1') $ret=$res->Ime." ".$res->Prezime;
         else $ret='<b style="color:red;">Izaberite lekara!</b>';
         return $ret;         
     }
@@ -35,6 +34,7 @@ class LekarModel extends CI_Model{
         $this->db->select('*');
         $this->db->from('lekar');
         $this->db->where('Bolnica', $idBolnice);
+        $this->db->where('isActive', 1);
         if ($idLekara!=NULL) $this->db->where('Username !=', $idLekara);
         return $this->db->get()->result();
     }
@@ -43,6 +43,7 @@ class LekarModel extends CI_Model{
     {
         $this->db->select('*');
         $this->db->from('lekar');
+        $this->db->where('isActive', 1);
         return $this->db->get()->result();
     }
     
@@ -54,12 +55,14 @@ class LekarModel extends CI_Model{
         $this->db->set('JMBG', $jmbg);
         $this->db->set('Adresa', $adresa);
         $this->db->set('Bolnica', $bolnica);
+        $this->db->set('isActive', 1);
         $this->db->insert('lekar');
     }
     
     public function izbrisi($lekar)
     {
+        $this->db->set('isActive', 0);
         $this->db->where('Username', $lekar);
-        $this->db->delete('lekar');
+        $this->db->update('lekar');
     }
 }
