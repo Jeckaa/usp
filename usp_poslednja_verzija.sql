@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: Jun 26, 2019 at 04:06 PM
+-- Generation Time: Jun 27, 2019 at 12:31 PM
 -- Server version: 5.7.24
 -- PHP Version: 7.2.14
 
@@ -33,6 +33,7 @@ CREATE TABLE IF NOT EXISTS `bolnica` (
   `IdBolnica` int(11) NOT NULL,
   `Naziv` varchar(20) COLLATE utf8_unicode_ci DEFAULT NULL,
   `Adresa` varchar(38) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `isActive` tinyint(4) NOT NULL,
   PRIMARY KEY (`IdBolnica`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
@@ -40,10 +41,10 @@ CREATE TABLE IF NOT EXISTS `bolnica` (
 -- Dumping data for table `bolnica`
 --
 
-INSERT INTO `bolnica` (`IdBolnica`, `Naziv`, `Adresa`) VALUES
-(1, 'Bolnica', 'Adresa bolnice'),
-(2, 'Bolnica2', 'Adresa bolnica 2'),
-(3, 'Bolnica3', 'Adresa bolnica 3');
+INSERT INTO `bolnica` (`IdBolnica`, `Naziv`, `Adresa`, `isActive`) VALUES
+(1, 'Bolnica', 'Adresa bolnice', 1),
+(2, 'Bolnica2', 'Adresa bolnica 2', 1),
+(3, 'Bolnica3', 'Adresa bolnica 3', 1);
 
 -- --------------------------------------------------------
 
@@ -65,14 +66,13 @@ CREATE TABLE IF NOT EXISTS `korisnik` (
 
 INSERT INTO `korisnik` (`Username`, `Password`, `Tip`) VALUES
 ('adsa', 'asd', 'P'),
-('bxzv', '1', 'P'),
+('bxzv', 'jelena', 'P'),
 ('dasd', '123', 'P'),
 ('jeckaa', 'jelena', 'P'),
 ('lekar', '123', 'L'),
 ('lekar2', '123', 'L'),
 ('lekar3', '123', 'L'),
 ('lekar4', '123', 'L'),
-('lekar5', '123', 'L'),
 ('lekar6', '123', 'L'),
 ('sluzbenik', '123', 'S'),
 ('stefan', 'stefi', 'P');
@@ -91,6 +91,7 @@ CREATE TABLE IF NOT EXISTS `lekar` (
   `JMBG` varchar(38) COLLATE utf8_unicode_ci DEFAULT NULL,
   `Adresa` varchar(38) COLLATE utf8_unicode_ci DEFAULT NULL,
   `Bolnica` int(11) DEFAULT NULL,
+  `isActive` tinyint(4) NOT NULL,
   PRIMARY KEY (`Username`),
   KEY `R_7` (`Bolnica`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
@@ -99,13 +100,12 @@ CREATE TABLE IF NOT EXISTS `lekar` (
 -- Dumping data for table `lekar`
 --
 
-INSERT INTO `lekar` (`Username`, `Ime`, `Prezime`, `JMBG`, `Adresa`, `Bolnica`) VALUES
-('lekar', 'Imelekar', 'Prezimelekar', '1234567891025', 'Adresa lekara', 1),
-('lekar2', 'lekar2', 'lekar2p', '1234567891025', 'adresa lekar 2', 1),
-('lekar3', 'lekar3', 'lekar3p', '1234567891025', 'adresa lekar 3', 1),
-('lekar4', 'Lekar4', 'Lekar4p', '1234567891025', 'adresa lekar 4', 2),
-('lekar5', 'Lekar5', 'Lekar5p', '1234567891025', 'adresa lekar 5', 2),
-('lekar6', 'Lekar6', 'Lekar6p', '1234567891025', 'adresa lekar 6', 2);
+INSERT INTO `lekar` (`Username`, `Ime`, `Prezime`, `JMBG`, `Adresa`, `Bolnica`, `isActive`) VALUES
+('lekar', 'Imelekar', 'Prezimelekar', '1234567891025', 'Adresa lekara', 1, 1),
+('lekar2', 'lekar2', 'lekar2p', '1234567891025', 'adresa lekar 2', 1, 1),
+('lekar3', 'lekar3', 'lekar3p', '1234567891025', 'adresa lekar 3', 1, 1),
+('lekar4', 'Lekar4', 'Lekar4p', '1234567891025', 'adresa lekar 4', 2, 1),
+('lekar6', 'Imelekar6', 'Lekar6p', '1234567891025', 'Adresa bolnice', 2, 1);
 
 -- --------------------------------------------------------
 
@@ -148,6 +148,7 @@ CREATE TABLE IF NOT EXISTS `pacijent` (
   `JMBG` varchar(13) COLLATE utf8_unicode_ci DEFAULT NULL,
   `Adresa` varchar(20) COLLATE utf8_unicode_ci DEFAULT NULL,
   `Bolnica` int(11) DEFAULT NULL,
+  `isActive` tinyint(4) NOT NULL,
   PRIMARY KEY (`Username`),
   KEY `R_5` (`Lekar`),
   KEY `R_8` (`Bolnica`)
@@ -157,10 +158,10 @@ CREATE TABLE IF NOT EXISTS `pacijent` (
 -- Dumping data for table `pacijent`
 --
 
-INSERT INTO `pacijent` (`Username`, `Lekar`, `Ime`, `Prezime`, `JMBG`, `Adresa`, `Bolnica`) VALUES
-('bxzv', 'lekar5', '112', '321', 'edewas', 'ads', 2),
-('jeckaa', 'lekar2', 'Jelena', 'Cvetinovic', '0602998778611', 'Nova adresa', 1),
-('stefan', 'lekar2', 'Stefan', 'Petrovic', '1234567890123', 'Stefanova adresa', 1);
+INSERT INTO `pacijent` (`Username`, `Lekar`, `Ime`, `Prezime`, `JMBG`, `Adresa`, `Bolnica`, `isActive`) VALUES
+('bxzv', 'lekar4', '112', '321', 'edewas', 'jeckaa', 2, 1),
+('jeckaa', 'lekar6', 'Jelena', 'Cvetinovic', '0602998778611', 'jeckaa', 2, 1),
+('stefan', 'lekar2', 'Stefan', 'Petrovic', '1234567890123', 'Stefanova adresa', 1, 1);
 
 -- --------------------------------------------------------
 
@@ -194,7 +195,11 @@ INSERT INTO `poruka` (`IdPoruka`, `Sadrzaj`, `PorukaOd`, `PorukaDo`, `Datum`, `P
 (6, 'dafasgas', 'lekar4', 'jeckaa', '2019-06-26 04:16:15', 1),
 (7, 'adasfa', 'lekar2', 'jeckaa', '2019-06-26 04:20:15', 1),
 (8, 'adasfa', 'lekar2', 'jeckaa', '2019-06-24 04:20:15', 1),
-(9, 'Molimo vas da ponovo izaberete lekara!', 'sluzbenik', 'bxzv', '2019-06-26 13:59:56', 0);
+(9, 'Molimo vas da ponovo izaberete lekara!', 'sluzbenik', 'bxzv', '2019-06-26 13:59:56', 1),
+(10, 'Molimo vas da ponovo izaberete lekara!', 'sluzbenik', 'bxzv', '2019-06-26 14:15:07', 1),
+(11, 'asdasdsa', 'bxzv', 'lekar6', '2019-06-26 14:22:45', 0),
+(12, 'Molimo vas da ponovo izaberete lekara!', 'sluzbenik', 'bxzv', '2019-06-26 16:00:18', 0),
+(13, 'Molimo vas da ponovo izaberete lekara!', 'sluzbenik', 'jeckaa', '2019-06-26 16:00:18', 0);
 
 -- --------------------------------------------------------
 
@@ -244,7 +249,7 @@ ALTER TABLE `merenja`
 --
 ALTER TABLE `pacijent`
   ADD CONSTRAINT `R_1` FOREIGN KEY (`Username`) REFERENCES `korisnik` (`Username`) ON DELETE CASCADE,
-  ADD CONSTRAINT `R_5` FOREIGN KEY (`Lekar`) REFERENCES `lekar` (`Username`) ON UPDATE SET NULL ON DELETE SET NULL ,
+  ADD CONSTRAINT `R_5` FOREIGN KEY (`Lekar`) REFERENCES `lekar` (`Username`) ON DELETE SET NULL ON UPDATE SET NULL,
   ADD CONSTRAINT `R_8` FOREIGN KEY (`Bolnica`) REFERENCES `bolnica` (`IdBolnica`);
 
 --
