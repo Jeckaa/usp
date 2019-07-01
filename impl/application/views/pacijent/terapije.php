@@ -24,7 +24,7 @@
             <div class="row" style="margin-top: 15;">
                 <div class="col-sm-12">
                     <div class="card text-white bg-primary mb-3">
-                        <div class="card-header"><?php echo "Tip: $terapija->Lekar <br> Datum: $terapija->Datum";  ?></div>
+                        <div class="card-header"><?php echo "Lekar: $terapija->Lekar <br> Datum: $terapija->Datum";  ?></div>
                         <div class="card-body">
                             <h5 class="card-title">Opis:</h5>
                             <p class="card-text"><?php echo $terapija->Opis; ?></p>
