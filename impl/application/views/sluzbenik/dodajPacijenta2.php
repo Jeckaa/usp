@@ -39,7 +39,7 @@
                             </div>
                             <div class="col-sm-3">
                                 <div class="form-group text-center">
-                                    <button type="submit" class="btn btn-danger disabled" formaction="<?php echo site_url("Pacijent/otkaziDodavanje"); ?>">Otkazi</button>
+                                    <button type="submit" class="btn btn-danger disabled" formaction="<?php echo site_url("Sluzbenik/otkaziDodavanje"); ?>">Otkazi</button>
                                 </div>
                             </div>
                             <div class="col-sm-3"> </div>

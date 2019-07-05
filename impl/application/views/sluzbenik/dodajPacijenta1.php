@@ -101,7 +101,7 @@
             <div class="col-sm-3"> </div>
             <div class="col-sm-3">
                 <div class="form-group">
-                    <button type="submit" class="btn btn-primary">Potvrdi</button>
+                    <button type="submit" class="btn btn-primary">Dalje</button>
                 </div>
             </div>
             <div class="col-sm-3"> 
