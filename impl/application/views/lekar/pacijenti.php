@@ -6,14 +6,14 @@
         <form name="selectPacijent" method="post">
             <div class="form-group">
                 <label for="exampleSelect1">Izaberite pacijenta</label>
-                <select class="form-control" id="exampleSelect1">
-                    <?php foreach($patients->result() as $patients):?>
+                <select name="selectPacijent" class="form-control" id="exampleSelect1">
+                    <?php foreach($patients as $patient):?>
                     <option value="<?php echo $patient->Username;?>"><?php echo $patient->Ime;?> <?php echo $patient->Prezime;?></option>
                     <?php endforeach;?>
                 </select>
                 <button type="submit" formaction="<?php echo site_url("Lekar/merenja");?>" class="btn btn-primary">Pregled merenja</button>
                 <button type="submit" formaction="<?php echo site_url("Lekar/terapije");?>" class="btn btn-primary">Pregled terapija</button>
-                <button type="submit" formaction="<?php echo site_url("Lekar/addTherapy");?>" class="btn btn-primary">Dodaj Terapiju</button>
+                <button type="submit" formaction="<?php echo site_url("Lekar/dodajTerapiju");?>" class="btn btn-primary">Dodaj Terapiju</button>
                 
             </div>
         </form>

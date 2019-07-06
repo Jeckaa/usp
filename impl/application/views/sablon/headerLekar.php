@@ -25,7 +25,7 @@
                         <a class="nav-link" href="<?php echo site_url("Lekar/pregledPoruka"); ?>">Poruke</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="<?php echo site_url("Pacijent/logout"); ?>">Odjavljivanje</a>
+                        <a class="nav-link" href="<?php echo site_url("Lekar/logout"); ?>">Odjavljivanje</a>
                     </li>
                 </ul>
             </div>

@@ -1,7 +1,7 @@
 <div class="container">
     <div class="row">
         <div class="col-sm-12">
-            <h3 align="center"><?php echo $id;?>
+            <h3 align="center">Terapija #<?php echo $id;?></h3>
         </div>
     </div>
     <div class="row">

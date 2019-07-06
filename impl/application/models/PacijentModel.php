@@ -104,4 +104,12 @@ class PacijentModel extends CI_Model {
             $this->Poruka->posalji($username, $pacijent->Username, $sadrzaj);
         }
     }
+    
+    public function mojiPacijenti($lekarUser){
+        $this->db->select('*');
+        $this->db->from('pacijent');
+        $this->db->where('Lekar', $lekarUser);
+        $this->db->where('isActive', 1);
+        return $this->db->get()->result();
+    }
 }

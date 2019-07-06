@@ -24,6 +24,26 @@ class Terapija extends CI_Model {
     }
     
     public function getTherapyById($idTher){
-        return $this->db->query("select + from terapija where IdTerapija={$idTher}")->row();
+        return $this->db->query("select * from terapija where IdTerapija={$idTher}")->row();
+    }
+    
+    public function dodajTerapiju($userPac, $userLekar, $sadrzaj){
+        $data = [];
+        $data["Datum"] = date("Y-m-d H:i:s");
+        $data["Pacijent"] = $userPac;
+        $data["Lekar"] = $userLekar;
+        $data["Opis"] = $sadrzaj;
+        $this->db->insert("terapija", $data);
+    }
+    
+    public function obrisiTerapiju($idTher){
+        $this->db->where("IdTerapija", $idTher);
+        $this->db->delete("terapija");
+    }
+    
+    public function izmeniTerapiju($id, $sadrzaj){
+        $this->db->set('Opis', $sadrzaj);
+        $this->db->where('IdTerapija', $id);
+        $this->db->update('terapija');
     }
 }

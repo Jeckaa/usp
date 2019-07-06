@@ -4,7 +4,13 @@
             <h3 align="center"><?php echo $ime . " - Terapije"?></h3>
         </div>
     </div>
+    <div class="row">
+        <div class="col-sm-12">
+            <h5 align="center" color="red"><?php if(isset($msg)) echo $msg;?></h5>
+        </div>
+    </div>
     <form name="Terapije" method="post">
+        <input type="hidden" name="pacUser" value="<?php echo $pacUser;?>">
     <div class="row">
         <div class="col-sm-12">
             <?php foreach($terapije as $terapija):?>

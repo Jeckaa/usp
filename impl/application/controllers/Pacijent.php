@@ -55,7 +55,9 @@ class Pacijent extends CI_Controller {
         $data['adresa']=$res->Adresa;
         $data['JMBG'] = $res->JMBG;
         $data['lekar']= $this->LekarModel->imeiPrezime($res->Lekar);
-        $data['bolnica']= $this->Bolnica->naziv($res->Bolnica);
+        $bolnica = $this->Bolnica->dohvatiBolnicu($res->Bolnica);
+        $data['bolnica']= $bolnica->Naziv;
+        $data["active"] = $bolnica->isActive;
         $this->load->view('pacijent/info.php', $data);
         $this->load->view("sablon/footer.php");
     }

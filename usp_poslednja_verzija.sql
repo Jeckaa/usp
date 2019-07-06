@@ -76,7 +76,8 @@ INSERT INTO `korisnik` (`Username`, `Password`, `Tip`, `isActive`) VALUES
 ('lekar4', '123', 'L', 1),
 ('lekar6', '123', 'L', 1),
 ('sluzbenik', '123', 'S', 1),
-('stefan', 'stefi', 'P', 1);
+('stefan', 'stefi', 'P', 1),
+('admin', 'admin', 'A', 1); 
 
 -- --------------------------------------------------------
 
@@ -210,9 +211,9 @@ INSERT INTO `poruka` (`IdPoruka`, `Sadrzaj`, `PorukaOd`, `PorukaDo`, `Datum`, `P
 
 DROP TABLE IF EXISTS `terapija`;
 CREATE TABLE IF NOT EXISTS `terapija` (
+  `IdTerapija` int(11) NOT NULL AUTO_INCREMENT,
   `Pacijent` varchar(38) COLLATE utf8_unicode_ci DEFAULT NULL,
   `Lekar` varchar(38) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `IdTerapija` int(11) NOT NULL,
   `Opis` varchar(200) COLLATE utf8_unicode_ci DEFAULT NULL,
   `Datum` timestamp NOT NULL,
   PRIMARY KEY (`IdTerapija`),
@@ -224,9 +225,9 @@ CREATE TABLE IF NOT EXISTS `terapija` (
 -- Dumping data for table `terapija`
 --
 
-INSERT INTO `terapija` (`Pacijent`, `Lekar`, `IdTerapija`, `Opis`, `Datum`) VALUES
-('jeckaa', 'lekar2', 1, 'afagsa', '2019-06-26 04:16:15'),
-('jeckaa', 'lekar2', 2, 'afagsa', '2019-06-26 05:16:15');
+INSERT INTO `terapija` (`Pacijent`, `Lekar`, `Opis`, `Datum`) VALUES
+('jeckaa', 'lekar2', 'afagsa', '2019-06-26 04:16:15'),
+('jeckaa', 'lekar2', 'afagsa', '2019-06-26 05:16:15');
 
 --
 -- Constraints for dumped tables

@@ -74,4 +74,18 @@ class LekarModel extends CI_Model{
         $this->db->where('Username', $lekar);
         $this->db->update('lekar');
     }
+    
+    public function info($username)
+    {
+        $this->db->select('*');
+        $this->db->from('lekar');
+        $this->db->where('Username', $username);
+        return $this->db->get()->row();
+    }
+    
+    public function promeniUstanovu($user, $ustanova){
+        $this->db->set("Bolnica", $ustanova);
+        $this->db->where("Username", $user);
+        $this->db->update("lekar");
+    }
 }
